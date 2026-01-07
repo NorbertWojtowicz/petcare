@@ -3,6 +3,7 @@ package com.example.petcare.controller;
 import com.example.petcare.dto.AuthRequest;
 import com.example.petcare.dto.AuthResponse;
 import com.example.petcare.dto.RegisterRequest;
+import com.example.petcare.dto.UserInfoResponse;
 import com.example.petcare.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +36,10 @@ public class AuthController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserInfoResponse> getCurrentUser() {
+        return ResponseEntity.ok(authService.getCurrentUser());
     }
 }
